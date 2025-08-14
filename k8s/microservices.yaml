@@ -1,0 +1,143 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: microservices-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+      - name: order-service
+        image: order-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3001
+        env:
+        - name: DB_HOST
+          value: "postgres-order-service"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USERNAME
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "password"
+        - name: DB_NAME
+          value: "order_db"
+        - name: RABBITMQ_URL
+          value: "amqp://admin:admin@rabbitmq-service:5672"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: microservices-demo
+spec:
+  selector:
+    app: order-service
+  ports:
+  - port: 3001
+    targetPort: 3001
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+  namespace: microservices-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+      - name: product-service
+        image: product-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3002
+        env:
+        - name: DB_HOST
+          value: "postgres-product-service"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USERNAME
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "password"
+        - name: DB_NAME
+          value: "product_db"
+        - name: RABBITMQ_URL
+          value: "amqp://admin:admin@rabbitmq-service:5672"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+  namespace: microservices-demo
+spec:
+  selector:
+    app: product-service
+  ports:
+  - port: 3002
+    targetPort: 3002
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-service
+  namespace: microservices-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: payment-service
+  template:
+    metadata:
+      labels:
+        app: payment-service
+    spec:
+      containers:
+      - name: payment-service
+        image: payment-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3003
+        env:
+        - name: DB_HOST
+          value: "postgres-payment-service"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USERNAME
+          value: "postgres"
+        - name: DB_PASSWORD
+          value: "password"
+        - name: DB_NAME
+          value: "payment_db"
+        - name: RABBITMQ_URL
+          value: "amqp://admin:admin@rabbitmq-service:5672"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-service
+  namespace: microservices-demo
+spec:
+  selector:
+    app: payment-service
+  ports:
+  - port: 3003
+    targetPort: 3003
+  type: ClusterIP

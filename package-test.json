@@ -1,0 +1,22 @@
+{
+  "name": "microservices-orders-test",
+  "version": "1.0.0",
+  "description": "ไฟล์ทดสอบ POST API /api/orders สำหรับทดสอบระบบคิวใน RabbitMQ",
+  "main": "test-orders-api.js",
+  "scripts": {
+    "test": "node test-orders-api.js",
+    "test:orders": "node test-orders-api.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "keywords": [
+    "microservices",
+    "rabbitmq",
+    "orders",
+    "api-test",
+    "nestjs"
+  ],
+  "author": "",
+  "license": "MIT"
+}

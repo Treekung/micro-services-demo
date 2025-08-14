@@ -1,0 +1,39 @@
+{
+  "name": "order-service",
+  "version": "1.0.0",
+  "description": "Order Microservice",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/core": "^11.0.1",
+    "@nestjs/microservices": "^11.1.6",
+    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/typeorm": "^11.0.0",
+    "typeorm": "^0.3.20",
+    "pg": "^8.11.3",
+    "amqplib": "^0.10.3",
+    "@nestjs/config": "^4.0.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/testing": "^11.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.10.7",
+    "@types/amqplib": "^0.10.4",
+    "jest": "^30.0.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.3"
+  }
+}
